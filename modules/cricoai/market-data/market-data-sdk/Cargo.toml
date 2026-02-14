@@ -1,0 +1,17 @@
+[package]
+name = "market-data-sdk"
+version.workspace = true
+publish = false
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "SDK for market-data module: API trait, types, and error definitions"
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+async-trait = { workspace = true }
+modkit-security = { workspace = true }
+chrono = { workspace = true }

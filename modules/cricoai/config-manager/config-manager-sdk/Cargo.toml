@@ -1,0 +1,16 @@
+[package]
+name = "config-manager-sdk"
+version.workspace = true
+publish = false
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "SDK for config-manager module: API trait, types, and error definitions"
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+async-trait = { workspace = true }
+modkit-security = { workspace = true }

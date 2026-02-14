@@ -402,6 +402,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1505bd5d3d116872e7271a6d4e16d81d0c8570876c8de68093a09ac269d8aac0"
 
 [[package]]
+name = "auth-manager-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "cf-modkit-security",
+ "thiserror 2.0.18",
+ "uuid",
+]
+
+[[package]]
 name = "autocfg"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1730,6 +1740,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "config-manager-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "cf-modkit-security",
+ "thiserror 2.0.18",
+]
+
+[[package]]
 name = "const-oid"
 version = "0.9.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2004,6 +2023,16 @@ dependencies = [
  "lock_api",
  "once_cell",
  "parking_lot_core",
+]
+
+[[package]]
+name = "data-ingestion-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "cf-modkit-security",
+ "chrono",
+ "thiserror 2.0.18",
 ]
 
 [[package]]
@@ -3807,6 +3836,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "market-data-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "cf-modkit-security",
+ "chrono",
+ "thiserror 2.0.18",
+]
+
+[[package]]
+name = "market-intelligence-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "cf-modkit-security",
+ "chrono",
+ "thiserror 2.0.18",
+]
+
+[[package]]
 name = "matchers"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3877,6 +3926,14 @@ dependencies = [
  "libc",
  "wasi",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "ml-service-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "thiserror 2.0.18",
 ]
 
 [[package]]
@@ -6981,6 +7038,16 @@ checksum = "04659ddb06c87d233c566112c1c9c5b9e98256d9af50ec3bc9c8327f873a7568"
 dependencies = [
  "quote",
  "syn 2.0.114",
+]
+
+[[package]]
+name = "trading-core-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "cf-modkit-security",
+ "chrono",
+ "thiserror 2.0.18",
 ]
 
 [[package]]

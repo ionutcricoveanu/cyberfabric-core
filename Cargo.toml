@@ -69,6 +69,13 @@ members = [
     "modules/system/tenant-resolver/plugins/single-tenant-tr-plugin",
     "modules/cricoai/trading-dashboard/trading-dashboard-sdk",
     "modules/cricoai/trading-dashboard/trading-dashboard",
+    "modules/cricoai/config-manager/config-manager-sdk",
+    "modules/cricoai/auth-manager/auth-manager-sdk",
+    "modules/cricoai/market-data/market-data-sdk",
+    "modules/cricoai/data-ingestion/data-ingestion-sdk",
+    "modules/cricoai/market-intelligence/market-intelligence-sdk",
+    "modules/cricoai/trading-core/trading-core-sdk",
+    "modules/cricoai/ml-service/ml-service-sdk",
 ]
 exclude = ["fuzz"]
 resolver = "3"

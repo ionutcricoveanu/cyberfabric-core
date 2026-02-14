@@ -1,0 +1,15 @@
+[package]
+name = "ml-service-sdk"
+version.workspace = true
+publish = false
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "SDK for ml-service gRPC bridge: API trait, types, and error definitions"
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+async-trait = { workspace = true }
