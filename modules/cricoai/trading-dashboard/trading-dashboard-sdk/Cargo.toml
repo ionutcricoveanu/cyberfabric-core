@@ -1,0 +1,34 @@
+[package]
+name = "trading-dashboard-sdk"
+version.workspace = true
+publish = false
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "SDK for trading-dashboard module: API trait, types, and error definitions"
+
+[lints]
+workspace = true
+
+[features]
+default = ["odata"]
+odata = [
+    "dep:modkit-odata-macros",
+    "dep:modkit-odata",
+    "dep:modkit-sdk",
+]
+
+[dependencies]
+thiserror = { workspace = true }
+async-trait = { workspace = true }
+
+# Security context for API methods
+modkit-security = { workspace = true }
+
+# OData macros (for #[derive(ODataFilterable)])
+modkit-odata-macros = { workspace = true, optional = true }
+modkit-odata = { workspace = true, optional = true }
+modkit-sdk = { workspace = true, optional = true }
+
+# Time handling
+chrono = { workspace = true }

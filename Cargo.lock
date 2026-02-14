@@ -3276,6 +3276,7 @@ dependencies = [
  "tenant-resolver-gw",
  "tokio",
  "tracing",
+ "trading-dashboard",
  "types",
  "users-info",
 ]
@@ -6980,6 +6981,51 @@ checksum = "04659ddb06c87d233c566112c1c9c5b9e98256d9af50ec3bc9c8327f873a7568"
 dependencies = [
  "quote",
  "syn 2.0.114",
+]
+
+[[package]]
+name = "trading-dashboard"
+version = "0.2.4"
+dependencies = [
+ "anyhow",
+ "arc-swap",
+ "async-trait",
+ "axum",
+ "cf-modkit",
+ "cf-modkit-auth",
+ "cf-modkit-db",
+ "cf-modkit-db-macros",
+ "cf-modkit-errors",
+ "cf-modkit-macros",
+ "cf-modkit-odata",
+ "cf-modkit-sdk",
+ "cf-modkit-security",
+ "cf-tenant-resolver-sdk",
+ "chrono",
+ "http",
+ "inventory",
+ "sea-orm",
+ "sea-orm-migration",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "trading-dashboard-sdk",
+ "utoipa",
+]
+
+[[package]]
+name = "trading-dashboard-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "cf-modkit-odata",
+ "cf-modkit-odata-macros",
+ "cf-modkit-sdk",
+ "cf-modkit-security",
+ "chrono",
+ "thiserror 2.0.18",
 ]
 
 [[package]]

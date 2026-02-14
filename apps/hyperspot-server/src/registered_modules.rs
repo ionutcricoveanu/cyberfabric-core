@@ -36,3 +36,8 @@ use contoso_tr_plugin as _;
 use fabrikam_tr_plugin as _;
 #[cfg(feature = "tenant-resolver-example")]
 use tenant_resolver_gw_example as _;
+
+// === CricoAI Modules ===
+
+#[cfg(feature = "cricoai")]
+use trading_dashboard as _;

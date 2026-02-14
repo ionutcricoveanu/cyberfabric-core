@@ -1,0 +1,66 @@
+[package]
+name = "trading-dashboard"
+version.workspace = true
+publish = false
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+default = ["odata"]
+odata = []
+
+[dependencies]
+# SDK - public API, models, and errors
+trading-dashboard-sdk = { path = "../trading-dashboard-sdk", features = ["odata"] }
+
+# Tenant resolver for multi-tenant access
+tenant-resolver-sdk = { package = "cf-tenant-resolver-sdk", path = "../../../../modules/system/tenant-resolver/tenant-resolver-sdk" }
+
+# Core dependencies
+anyhow = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+inventory = { workspace = true }
+
+# Serde and JSON
+serde = { workspace = true }
+serde_json = { workspace = true }
+utoipa = { workspace = true }
+
+# HTTP and REST
+axum = { workspace = true, features = ["macros"] }
+http = { workspace = true }
+
+# Time handling
+chrono = { workspace = true }
+
+# Lock-free atomic swaps
+arc-swap = { workspace = true }
+
+# Database - SeaORM
+sea-orm = { workspace = true, features = [
+    "sqlx-postgres",
+    "runtime-tokio-rustls",
+    "macros",
+    "with-chrono",
+] }
+sea-orm-migration = { workspace = true, features = ["sqlx-postgres"] }
+
+# Error handling
+thiserror = { workspace = true }
+
+# Local dependencies
+modkit = { workspace = true }
+modkit-db = { workspace = true, features = ["pg"] }
+modkit-db-macros = { workspace = true }
+modkit-auth = { workspace = true }
+modkit-security = { workspace = true }
+modkit-errors = { workspace = true }
+modkit-odata = { workspace = true, features = ["with-utoipa"] }
+modkit-sdk = { workspace = true }
+modkit-macros = { workspace = true }
