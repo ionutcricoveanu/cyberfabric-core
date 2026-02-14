@@ -3,3 +3,4 @@ pub mod pnl;
 pub mod sell_orders;
 pub mod temps;
 pub mod total_asset_val;
+pub mod trade_pairs;

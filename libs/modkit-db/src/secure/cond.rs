@@ -6,6 +6,7 @@ use crate::secure::{AccessScope, ScopableEntity};
 /// Builds a `SeaORM` `Condition` based on the implicit security policy.
 ///
 /// # Policy Rules
+/// 0. **Unrestricted entity** (`IS_UNRESTRICTED = true`) → pass through (`WHERE true`)
 /// 1. **Empty scope** (no tenants, no resources) → deny all (`WHERE false`)
 /// 2. **Tenants only** → filter by `tenant_col IN tenant_ids` (via provider)
 ///    - If entity has no `tenant_col` but `tenant_ids` provided → deny all
@@ -22,12 +23,18 @@ use crate::secure::{AccessScope, ScopableEntity};
 /// - No query can bypass tenant isolation when tenants are specified
 /// - Explicit resource IDs provide fine-grained access
 /// - Empty scopes are explicitly denied rather than returning all data
+/// - Unrestricted entities (global tables) are always accessible
 pub fn build_scope_condition<E>(scope: &AccessScope) -> Condition
 where
     E: ScopableEntity + EntityTrait,
     E::Column: ColumnTrait + Copy,
 {
     let deny_all = || Condition::all().add(Expr::value(false));
+
+    // Rule 0: Unrestricted entities bypass all scope checks (WHERE true)
+    if E::IS_UNRESTRICTED {
+        return Condition::all().add(Expr::value(true));
+    }
 
     // Rule 1: Nothing supplied → deny all
     if scope.is_empty() {
