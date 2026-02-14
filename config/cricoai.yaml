@@ -1,0 +1,77 @@
+# CricoAI v2 - Development Configuration
+#
+# Uses existing PostgreSQL (Binance database) for trading-dashboard module.
+# Auth disabled for local development.
+
+server:
+  home_dir: "~/.hyperspot"
+
+database:
+  servers:
+    cricoai_postgres:
+      engine: "postgres"
+      host: "localhost"
+      port: 5432
+      user: "binance"
+      password: "I0nutrox23$"
+      pool:
+        max_conns: 10
+        acquire_timeout: "30s"
+
+logging:
+  default:
+    console_level: info
+    file: "logs/hyperspot.log"
+    file_level: debug
+    max_age_days: 7
+    max_backups: 3
+    max_size_mb: 10
+  sqlx:
+    console_level: warn
+    file: "logs/sql.log"
+    file_level: debug
+
+modules:
+  api-gateway:
+    config:
+      bind_addr: "127.0.0.1:8087"
+      enable_docs: true
+      cors_enabled: false
+      openapi:
+        title: "CricoAI v2 API"
+        version: "0.1.0"
+        description: "CricoAI Trading Platform API"
+      defaults:
+        body_limit_bytes: 64000000
+        rate_limit:
+          rps: 1000
+          burst: 200
+          in_flight: 64
+      auth_disabled: true
+      require_auth_by_default: true
+
+  module-orchestrator:
+    config: {}
+
+  grpc-hub:
+    config:
+      listen_addr: "uds:///tmp/hyperspot-grpc"
+
+  simple-user-settings:
+    database:
+      dsn: "sqlite://settings.db?WAL=true"
+    config:
+      max_field_length: 100
+
+  tenant-resolver:
+    config:
+      vendor: "CricoAI"
+
+  trading-dashboard:
+    database:
+      server: "cricoai_postgres"
+      dbname: "Binance"
+    config: {}
+
+tracing:
+  enabled: false

@@ -27,6 +27,7 @@ otel = ["modkit/otel"]
 mimalloc = { version = "0.1" }
 # Local crates
 modkit = { workspace = true, features = ["bootstrap"] }
+modkit-db = { workspace = true, features = ["pg", "sqlite"] }
 
 # System modules
 api_gateway = { package = "cf-api-gateway", path = "../../modules/system/api-gateway" }
