@@ -51,12 +51,24 @@ impl Module for TradingDashboard {
 
         let db: Arc<DBProvider<DbError>> = Arc::new(ctx.db_required()?);
 
+        // Connect to Model_Data database if DSN is configured
+        let model_db: Option<Arc<DBProvider<DbError>>> = if let Some(dsn) = &cfg.model_data_dsn {
+            info!("Connecting to Model_Data database");
+            let model_data_db = modkit_db::connect_db(dsn, modkit_db::ConnectOpts::default())
+                .await
+                .map_err(|e| anyhow::anyhow!("Failed to connect to Model_Data: {e}"))?;
+            Some(Arc::new(DBProvider::new(model_data_db)))
+        } else {
+            info!("No model_data_dsn configured — model/agent endpoints will be unavailable");
+            None
+        };
+
         let resolver = ctx
             .client_hub()
             .get::<dyn TenantResolverGatewayClient>()
             .map_err(|e| anyhow::anyhow!("failed to get tenant resolver: {e}"))?;
 
-        let service = Arc::new(TradingDashboardService::new(db, resolver, cfg));
+        let service = Arc::new(TradingDashboardService::new(db, model_db, resolver, cfg));
         self.service.store(Some(service.clone()));
 
         let local = TradingDashboardLocalClient::new(service);
