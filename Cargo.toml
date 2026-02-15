@@ -79,6 +79,8 @@ members = [
     "modules/cricoai/agent-analytics/agent-analytics",
     "modules/cricoai/agent-trade-impact/agent-trade-impact-sdk",
     "modules/cricoai/agent-trade-impact/agent-trade-impact",
+    "modules/cricoai/auth-management/auth-management-sdk",
+    "modules/cricoai/auth-management/auth-management",
     "modules/cricoai/auth-manager/auth-manager-sdk",
     "modules/cricoai/market-data/market-data-sdk",
     "modules/cricoai/data-ingestion/data-ingestion-sdk",
@@ -413,6 +415,12 @@ starship-battery = "0.10"
 local-ip-address = "0.6"
 machine-uid = "0.5"
 nvml-wrapper = "0.11"
+
+# Auth / 2FA
+bcrypt = "0.16"
+totp-rs = { version = "5.6", features = ["gen_secret", "otpauth"] }
+qrcode = "0.14"
+image = { version = "0.25", default-features = false, features = ["png"] }
 
 # Text processing
 base64 = "0.22"

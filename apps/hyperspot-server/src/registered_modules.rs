@@ -51,3 +51,5 @@ use performance_monitor as _;
 use agent_analytics as _;
 #[cfg(feature = "cricoai")]
 use agent_trade_impact as _;
+#[cfg(feature = "cricoai")]
+use auth_management as _;

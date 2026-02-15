@@ -1,0 +1,16 @@
+[package]
+name = "auth-management-sdk"
+version.workspace = true
+publish = false
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "SDK for auth-management module"
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+async-trait = { workspace = true }
+modkit-security = { workspace = true }

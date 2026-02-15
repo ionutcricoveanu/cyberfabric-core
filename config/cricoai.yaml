@@ -98,5 +98,9 @@ modules:
     config:
       model_data_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Model_Data"
 
+  auth-management:
+    config:
+      binance_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Binance"
+
 tracing:
   enabled: false
