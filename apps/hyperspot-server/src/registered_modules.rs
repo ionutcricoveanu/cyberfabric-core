@@ -49,3 +49,5 @@ use model_dashboard as _;
 use performance_monitor as _;
 #[cfg(feature = "cricoai")]
 use agent_analytics as _;
+#[cfg(feature = "cricoai")]
+use agent_trade_impact as _;

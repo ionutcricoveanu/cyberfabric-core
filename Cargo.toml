@@ -77,6 +77,8 @@ members = [
     "modules/cricoai/performance-monitor/performance-monitor",
     "modules/cricoai/agent-analytics/agent-analytics-sdk",
     "modules/cricoai/agent-analytics/agent-analytics",
+    "modules/cricoai/agent-trade-impact/agent-trade-impact-sdk",
+    "modules/cricoai/agent-trade-impact/agent-trade-impact",
     "modules/cricoai/auth-manager/auth-manager-sdk",
     "modules/cricoai/market-data/market-data-sdk",
     "modules/cricoai/data-ingestion/data-ingestion-sdk",

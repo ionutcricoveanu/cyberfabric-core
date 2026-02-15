@@ -94,5 +94,9 @@ modules:
     config:
       model_data_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Model_Data"
 
+  agent-trade-impact:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Model_Data"
+
 tracing:
   enabled: false
