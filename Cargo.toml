@@ -73,6 +73,8 @@ members = [
     "modules/cricoai/config-manager/config-manager",
     "modules/cricoai/model-dashboard/model-dashboard-sdk",
     "modules/cricoai/model-dashboard/model-dashboard",
+    "modules/cricoai/performance-monitor/performance-monitor-sdk",
+    "modules/cricoai/performance-monitor/performance-monitor",
     "modules/cricoai/auth-manager/auth-manager-sdk",
     "modules/cricoai/market-data/market-data-sdk",
     "modules/cricoai/data-ingestion/data-ingestion-sdk",

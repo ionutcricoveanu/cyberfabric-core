@@ -45,3 +45,5 @@ use trading_dashboard as _;
 use config_manager as _;
 #[cfg(feature = "cricoai")]
 use model_dashboard as _;
+#[cfg(feature = "cricoai")]
+use performance_monitor as _;

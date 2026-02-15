@@ -3335,6 +3335,7 @@ dependencies = [
  "fabrikam-tr-plugin",
  "mimalloc",
  "model-dashboard",
+ "performance-monitor",
  "serde-saphyr",
  "serde_json",
  "tempfile",
@@ -4643,6 +4644,44 @@ name = "percent-encoding"
 version = "2.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220"
+
+[[package]]
+name = "performance-monitor"
+version = "0.2.4"
+dependencies = [
+ "anyhow",
+ "arc-swap",
+ "async-trait",
+ "axum",
+ "cf-modkit",
+ "cf-modkit-auth",
+ "cf-modkit-db",
+ "cf-modkit-db-macros",
+ "cf-modkit-errors",
+ "cf-modkit-macros",
+ "cf-modkit-security",
+ "cf-tenant-resolver-sdk",
+ "chrono",
+ "http",
+ "inventory",
+ "performance-monitor-sdk",
+ "sea-orm",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "utoipa",
+]
+
+[[package]]
+name = "performance-monitor-sdk"
+version = "0.2.4"
+dependencies = [
+ "async-trait",
+ "cf-modkit-security",
+ "thiserror 2.0.18",
+]
 
 [[package]]
 name = "petgraph"
