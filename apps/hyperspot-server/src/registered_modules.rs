@@ -47,3 +47,5 @@ use config_manager as _;
 use model_dashboard as _;
 #[cfg(feature = "cricoai")]
 use performance_monitor as _;
+#[cfg(feature = "cricoai")]
+use agent_analytics as _;

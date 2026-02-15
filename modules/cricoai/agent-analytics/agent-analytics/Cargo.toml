@@ -1,0 +1,62 @@
+[package]
+name = "agent-analytics"
+version.workspace = true
+publish = false
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# SDK
+agent-analytics-sdk = { path = "../agent-analytics-sdk" }
+
+# Tenant resolver
+tenant-resolver-sdk = { package = "cf-tenant-resolver-sdk", path = "../../../../modules/system/tenant-resolver/tenant-resolver-sdk" }
+
+# Core
+anyhow = { workspace = true }
+async-trait = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+inventory = { workspace = true }
+
+# Serde and JSON
+serde = { workspace = true }
+serde_json = { workspace = true }
+utoipa = { workspace = true }
+
+# HTTP
+axum = { workspace = true, features = ["macros"] }
+http = { workspace = true }
+
+# Time
+chrono = { workspace = true }
+
+# Lock-free atomic swaps
+arc-swap = { workspace = true }
+
+# Database - SeaORM (raw queries against Model_Data)
+sea-orm = { workspace = true, features = [
+    "sqlx-postgres",
+    "runtime-tokio-rustls",
+    "macros",
+    "with-chrono",
+    "with-rust_decimal",
+    "with-json",
+] }
+rust_decimal = { workspace = true }
+
+# Error handling
+thiserror = { workspace = true }
+
+# Local dependencies
+modkit = { workspace = true }
+modkit-db = { workspace = true, features = ["pg"] }
+modkit-db-macros = { workspace = true }
+modkit-auth = { workspace = true }
+modkit-security = { workspace = true }
+modkit-errors = { workspace = true }
+modkit-macros = { workspace = true }

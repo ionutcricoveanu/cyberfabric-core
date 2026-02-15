@@ -90,5 +90,9 @@ modules:
     config:
       binance_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Binance"
 
+  agent-analytics:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Model_Data"
+
 tracing:
   enabled: false
