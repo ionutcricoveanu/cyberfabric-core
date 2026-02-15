@@ -43,3 +43,5 @@ use tenant_resolver_gw_example as _;
 use trading_dashboard as _;
 #[cfg(feature = "cricoai")]
 use config_manager as _;
+#[cfg(feature = "cricoai")]
+use model_dashboard as _;

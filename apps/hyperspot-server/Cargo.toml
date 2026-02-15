@@ -20,7 +20,7 @@ tenant-resolver-example = [
 ]
 single-tenant = ["dep:single-tenant-tr-plugin"]
 static-tenants = ["dep:static-tr-plugin"]
-cricoai = ["dep:trading-dashboard", "dep:config-manager"]
+cricoai = ["dep:trading-dashboard", "dep:config-manager", "dep:model-dashboard"]
 otel = ["modkit/otel"]
 
 [dependencies]
@@ -55,6 +55,7 @@ serde_json = { workspace = true }
 # CricoAI modules
 trading-dashboard = { path = "../../modules/cricoai/trading-dashboard/trading-dashboard", optional = true }
 config-manager = { path = "../../modules/cricoai/config-manager/config-manager", optional = true }
+model-dashboard = { path = "../../modules/cricoai/model-dashboard/model-dashboard", optional = true }
 
 # Optional example module
 users-info = { path = "../../examples/modkit/users-info/users-info", optional = true }
