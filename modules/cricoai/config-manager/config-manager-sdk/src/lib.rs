@@ -14,4 +14,4 @@ pub mod models;
 
 pub use client::ConfigManagerApi;
 pub use errors::ConfigManagerError;
-pub use models::{PairConfig, TradingSettings};
+pub use models::{ConfigValue, PairConfig, TradingConfig, TradingSettings};

@@ -74,5 +74,13 @@ modules:
     config:
       model_data_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Model_Data"
 
+  config-manager:
+    database:
+      server: "cricoai_postgres"
+      dbname: "Binance"
+    config:
+      config_path: "/home/ionut/cricoai-v2/v1-code/cricoai_service/config.yml"
+      klines_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Binance_Klines"
+
 tracing:
   enabled: false
