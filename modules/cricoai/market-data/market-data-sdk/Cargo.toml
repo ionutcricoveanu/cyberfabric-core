@@ -5,7 +5,7 @@ publish = false
 edition.workspace = true
 license.workspace = true
 authors.workspace = true
-description = "SDK for market-data module: API trait, types, and error definitions"
+description = "SDK for market-data module: API trait, kline models, and error definitions"
 
 [lints]
 workspace = true
@@ -13,5 +13,18 @@ workspace = true
 [dependencies]
 thiserror = { workspace = true }
 async-trait = { workspace = true }
+
+# Security context for API methods
 modkit-security = { workspace = true }
+
+# API DTO macros
+modkit-macros = { workspace = true }
+
+# Time handling
 chrono = { workspace = true }
+
+# Serialization
+serde = { workspace = true }
+
+# OpenAPI schema
+utoipa = { workspace = true }

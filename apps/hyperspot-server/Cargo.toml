@@ -20,7 +20,7 @@ tenant-resolver-example = [
 ]
 single-tenant = ["dep:single-tenant-tr-plugin"]
 static-tenants = ["dep:static-tr-plugin"]
-cricoai = ["dep:trading-dashboard", "dep:config-manager", "dep:model-dashboard", "dep:performance-monitor", "dep:agent-analytics", "dep:agent-trade-impact", "dep:auth-management"]
+cricoai = ["dep:trading-dashboard", "dep:config-manager", "dep:model-dashboard", "dep:performance-monitor", "dep:agent-analytics", "dep:agent-trade-impact", "dep:auth-management", "dep:market-data", "dep:data-ingestion", "dep:market-intelligence", "dep:ml-service-sdk", "dep:trading-core"]
 otel = ["modkit/otel"]
 
 [dependencies]
@@ -60,6 +60,11 @@ performance-monitor = { path = "../../modules/cricoai/performance-monitor/perfor
 agent-analytics = { path = "../../modules/cricoai/agent-analytics/agent-analytics", optional = true }
 agent-trade-impact = { path = "../../modules/cricoai/agent-trade-impact/agent-trade-impact", optional = true }
 auth-management = { path = "../../modules/cricoai/auth-management/auth-management", optional = true }
+market-data = { path = "../../modules/cricoai/market-data/market-data", optional = true }
+data-ingestion = { path = "../../modules/cricoai/data-ingestion/data-ingestion", optional = true }
+market-intelligence = { path = "../../modules/cricoai/market-intelligence/market-intelligence", optional = true }
+ml-service-sdk = { path = "../../modules/cricoai/ml-service/ml-service-sdk", optional = true }
+trading-core = { path = "../../modules/cricoai/trading-core/trading-core", optional = true }
 
 # Optional example module
 users-info = { path = "../../examples/modkit/users-info/users-info", optional = true }

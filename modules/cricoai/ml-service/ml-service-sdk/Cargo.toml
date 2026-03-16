@@ -13,3 +13,10 @@ workspace = true
 [dependencies]
 thiserror = { workspace = true }
 async-trait = { workspace = true }
+tonic = { version = "0.12", features = ["transport"] }
+prost = { version = "0.13" }
+tokio = { workspace = true, features = ["full"] }
+tracing = { workspace = true }
+
+[build-dependencies]
+tonic-build = "0.12"

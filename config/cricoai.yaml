@@ -102,5 +102,82 @@ modules:
     config:
       binance_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Binance"
 
+  market-data:
+    config:
+      klines_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Binance_Klines"
+      binance_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Binance"
+      binance_url: "https://api.binance.com"
+      intervals: "1m,5m,15m,1h,4h"
+      collection_interval_secs: 60
+      limit: 500
+      testnet: false
+
+  data-ingestion:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Model_Data"
+      symbols: ["BTC", "ETH", "BNB", "ADA", "SOL", "DOT", "LINK", "UNI"]
+      reddit_rss_interval_minutes: 60
+      coingecko_interval_minutes: 30
+      sentiment_interval_minutes: 30
+      onchain_interval_minutes: 60
+      cryptopanic_api_key: null
+      newsapi_api_key: null
+      dune_api_key: null
+      glassnode_api_key: null
+      moralis_api_key: null
+
+  market-intelligence:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Model_Data"
+      tier_schedule:
+        hot_interval_minutes: 5
+        warm_interval_minutes: 15
+        stable_interval_minutes: 30
+        cold_interval_minutes: 60
+      llm:
+        ollama_url: "http://localhost:11434"
+        model_name: "mistral"
+        timeout_secs: 30
+        temperature: 0.7
+        max_tokens: 2048
+      symbols: ["BTC", "ETH", "BNB", "ADA", "SOL", "DOT", "LINK", "UNI"]
+      sentiment_lookback_hours: 6
+
+  ml-service:
+    config:
+      grpc_url: "http://localhost:50051"
+      connect_timeout_secs: 10
+      request_timeout_secs: 30
+
+  trading-core:
+    database:
+      server: "cricoai_postgres"
+      dbname: "Binance"
+    config:
+      binance_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Binance"
+      klines_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Binance_Klines"
+      model_data_dsn: "postgresql://binance:I0nutrox23$@localhost:5432/Model_Data"
+      api_key: "riIZZhDbdcvmESy9BPsjcimpPRuiE1c3QdBje3846M815AHCNDQji1lVKet9be8T"
+      api_secret: "c6AO6KZvMkBXiQwDuNnYv54CPdoCllUsg0oFvx5RqQyp6QhZH7G7ASXk5q43hMeA"
+      testnet: true
+      main_loop_interval_secs: 300
+      buy_strategy_interval_secs: 1800
+      sell_strategy_interval_secs: 900
+      kline_interval: "1h"
+      trading_enabled: false
+      buying_enabled: false
+      ml_service_url: "http://localhost:50051"
+      position_sizing:
+        kelly_fraction: 0.25
+        max_position_pct: 5.0
+        min_position_usdt: 10.0
+      risk_management:
+        max_daily_loss_usdt: 500.0
+        stop_loss_pct: 2.0
+        take_profit_pct: 5.0
+        max_leverage: 1.0
+        max_open_positions: 5
+        max_loss_per_trade_pct: 100.0
+
 tracing:
   enabled: false

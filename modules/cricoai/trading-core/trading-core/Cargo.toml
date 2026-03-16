@@ -1,0 +1,72 @@
+[package]
+name = "trading-core"
+version.workspace = true
+publish = false
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Trading-core module: Main trading engine with buy/sell logic and Binance integration"
+
+[lints]
+workspace = true
+
+[dependencies]
+# SDK - public API, models, and errors
+trading-core-sdk = { path = "../trading-core-sdk" }
+market-data-sdk = { path = "../../market-data/market-data-sdk" }
+market-intelligence-sdk = { path = "../../market-intelligence/market-intelligence-sdk" }
+config-manager-sdk = { path = "../../config-manager/config-manager-sdk" }
+ml-service-sdk = { path = "../../ml-service/ml-service-sdk" }
+
+modkit = { workspace = true }
+modkit-macros = { workspace = true }
+modkit-security = { workspace = true }
+
+# Async/Runtime
+tokio = { workspace = true, features = ["full"] }
+async-trait = { workspace = true }
+tokio-util = { workspace = true }
+inventory = { workspace = true }
+
+# Serialization
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+serde_yaml = "0.9"
+
+# Database
+sea-orm = { workspace = true, features = ["sqlx-postgres", "runtime-tokio-rustls"] }
+sea-orm-migration = { workspace = true, features = ["sqlx-postgres"] }
+
+# Utilities
+chrono = { workspace = true }
+rust_decimal = "1.35"
+uuid = { workspace = true, features = ["v4", "serde"] }
+tracing = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+
+# Cryptography for Binance API signing
+hmac = "0.12"
+sha2 = { workspace = true }
+hex = { workspace = true }
+
+# HTTP/API
+reqwest = { version = "0.12", features = ["json"] }
+axum = { workspace = true }
+http = { workspace = true }
+utoipa = { workspace = true, features = ["macros"] }
+
+# Other dependencies for trading logic
+arc-swap = { workspace = true }
+parking_lot = "0.12"
+num-traits = "0.2"
+
+# Local dependencies
+modkit-db = { workspace = true, features = ["pg"] }
+modkit-db-macros = { workspace = true }
+modkit-auth = { workspace = true }
+modkit-errors = { workspace = true }
+modkit-sdk = { workspace = true }
+
+[dev-dependencies]
+tokio-test = "0.4"

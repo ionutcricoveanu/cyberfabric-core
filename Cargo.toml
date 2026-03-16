@@ -83,9 +83,13 @@ members = [
     "modules/cricoai/auth-management/auth-management",
     "modules/cricoai/auth-manager/auth-manager-sdk",
     "modules/cricoai/market-data/market-data-sdk",
+    "modules/cricoai/market-data/market-data",
     "modules/cricoai/data-ingestion/data-ingestion-sdk",
+    "modules/cricoai/data-ingestion/data-ingestion",
     "modules/cricoai/market-intelligence/market-intelligence-sdk",
+    "modules/cricoai/market-intelligence/market-intelligence",
     "modules/cricoai/trading-core/trading-core-sdk",
+    "modules/cricoai/trading-core/trading-core",
     "modules/cricoai/ml-service/ml-service-sdk",
 ]
 exclude = ["fuzz"]

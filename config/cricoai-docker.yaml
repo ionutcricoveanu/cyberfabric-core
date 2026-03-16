@@ -1,0 +1,183 @@
+# CricoAI v2 - Docker Production Configuration
+#
+# All localhost references replaced with Docker service DNS names.
+# Bind address set to 0.0.0.0 for container networking.
+
+server:
+  home_dir: "/app"
+
+database:
+  servers:
+    cricoai_postgres:
+      engine: "postgres"
+      host: "postgres"
+      port: 5432
+      user: "binance"
+      password: "I0nutrox23$"
+      pool:
+        max_conns: 20
+        acquire_timeout: "30s"
+
+logging:
+  default:
+    console_level: info
+    file: "logs/hyperspot.log"
+    file_level: debug
+    max_age_days: 7
+    max_backups: 3
+    max_size_mb: 10
+  sqlx:
+    console_level: warn
+    file: "logs/sql.log"
+    file_level: debug
+
+modules:
+  api-gateway:
+    config:
+      bind_addr: "0.0.0.0:8087"
+      enable_docs: true
+      cors_enabled: true
+      openapi:
+        title: "CricoAI v2 API"
+        version: "0.3.0"
+        description: "CricoAI Trading Platform API"
+      defaults:
+        body_limit_bytes: 64000000
+        rate_limit:
+          rps: 1000
+          burst: 200
+          in_flight: 64
+      auth_disabled: true
+      require_auth_by_default: true
+
+  module-orchestrator:
+    config: {}
+
+  grpc-hub:
+    config:
+      listen_addr: "uds:///tmp/hyperspot-grpc"
+
+  simple-user-settings:
+    database:
+      dsn: "sqlite://settings.db?WAL=true"
+    config:
+      max_field_length: 100
+
+  tenant-resolver:
+    config:
+      vendor: "CricoAI"
+
+  trading-dashboard:
+    database:
+      server: "cricoai_postgres"
+      dbname: "Binance"
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Model_Data"
+
+  config-manager:
+    database:
+      server: "cricoai_postgres"
+      dbname: "Binance"
+    config:
+      config_path: "/app/config/trading-config.yml"
+      klines_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Binance_Klines"
+
+  model-dashboard:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Model_Data"
+
+  performance-monitor:
+    config:
+      binance_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Binance"
+
+  agent-analytics:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Model_Data"
+
+  agent-trade-impact:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Model_Data"
+
+  auth-management:
+    config:
+      binance_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Binance"
+
+  market-data:
+    config:
+      klines_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Binance_Klines"
+      binance_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Binance"
+      binance_url: "https://api.binance.com"
+      intervals: "1m,5m,15m,1h,4h"
+      collection_interval_secs: 60
+      limit: 500
+      testnet: false
+
+  data-ingestion:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Model_Data"
+      symbols: ["BTC", "ETH", "BNB", "ADA", "SOL", "DOT", "LINK", "UNI"]
+      reddit_rss_interval_minutes: 60
+      coingecko_interval_minutes: 30
+      sentiment_interval_minutes: 30
+      onchain_interval_minutes: 60
+      cryptopanic_api_key: null
+      newsapi_api_key: null
+      dune_api_key: null
+      glassnode_api_key: null
+      moralis_api_key: null
+
+  market-intelligence:
+    config:
+      model_data_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Model_Data"
+      tier_schedule:
+        hot_interval_minutes: 5
+        warm_interval_minutes: 15
+        stable_interval_minutes: 30
+        cold_interval_minutes: 60
+      llm:
+        ollama_url: "http://host.docker.internal:11434"
+        model_name: "mistral"
+        timeout_secs: 30
+        temperature: 0.7
+        max_tokens: 2048
+      symbols: ["BTC", "ETH", "BNB", "ADA", "SOL", "DOT", "LINK", "UNI"]
+      sentiment_lookback_hours: 6
+
+  ml-service:
+    config:
+      grpc_url: "http://ml-service:50051"
+      connect_timeout_secs: 10
+      request_timeout_secs: 30
+
+  trading-core:
+    database:
+      server: "cricoai_postgres"
+      dbname: "Binance"
+    config:
+      binance_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Binance"
+      klines_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Binance_Klines"
+      model_data_dsn: "postgresql://binance:I0nutrox23$@postgres:5432/Model_Data"
+      api_key: ""
+      api_secret: ""
+      testnet: true
+      main_loop_interval_secs: 300
+      buy_strategy_interval_secs: 1800
+      sell_strategy_interval_secs: 900
+      kline_interval: "1h"
+      trading_enabled: false
+      buying_enabled: false
+      ml_service_url: "http://ml-service:50051"
+      position_sizing:
+        kelly_fraction: 0.25
+        max_position_pct: 5.0
+        min_position_usdt: 10.0
+      risk_management:
+        max_daily_loss_usdt: 500.0
+        stop_loss_pct: 2.0
+        take_profit_pct: 5.0
+        max_leverage: 1.0
+        max_open_positions: 5
+        max_loss_per_trade_pct: 100.0
+
+tracing:
+  enabled: false

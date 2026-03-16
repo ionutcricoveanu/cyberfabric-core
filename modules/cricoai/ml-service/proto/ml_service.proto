@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package ml_service;
+
+// ML Service - Python gRPC server for model predictions
+service MlService {
+  // Get ML prediction for a symbol and interval
+  rpc GetPrediction (GetPredictionRequest) returns (PredictionResponse) {}
+  
+  // Get technical indicators for a symbol
+  rpc GetTechnicalIndicators (GetIndicatorsRequest) returns (IndicatorsResponse) {}
+  
+  // Get current market regime for a symbol
+  rpc GetMarketRegime (GetMarketRegimeRequest) returns (MarketRegimeResponse) {}
+  
+  // Health check
+  rpc Health (HealthCheckRequest) returns (HealthCheckResponse) {}
+}
+
+// Prediction request
+message GetPredictionRequest {
+  string symbol = 1;
+  string interval = 2;
+}
+
+// Prediction response
+message PredictionResponse {
+  string symbol = 1;
+  string interval = 2;
+  string direction = 3;          // BUY, SELL, HOLD
+  double confidence = 4;          // 0.0 - 1.0
+  double predicted_change_pct = 5;
+  int64 timestamp_seconds = 6;   // When prediction was made
+}
+
+// Technical indicators request
+message GetIndicatorsRequest {
+  string symbol = 1;
+}
+
+// Technical indicators response
+message IndicatorsResponse {
+  string symbol = 1;
+  double rsi = 2;               // Relative Strength Index
+  double macd = 3;              // MACD line
+  double macd_signal = 4;       // MACD signal line
+  double bollinger_upper = 5;   // Bollinger upper band
+  double bollinger_lower = 6;   // Bollinger lower band
+  double ema_12 = 7;            // 12-period EMA
+  double ema_26 = 8;            // 26-period EMA
+  int64 timestamp_seconds = 9;  // When indicators were calculated
+}
+
+// Market regime request
+message GetMarketRegimeRequest {
+  string symbol = 1;
+}
+
+// Market regime response
+message MarketRegimeResponse {
+  string symbol = 1;
+  string regime = 2;            // TRENDING, RANGING, VOLATILE
+  double confidence = 3;        // 0.0 - 1.0
+  int64 timestamp_seconds = 4;  // When regime was detected
+}
+
+// Health check request
+message HealthCheckRequest {
+  string service = 1;
+}
+
+// Health check response
+message HealthCheckResponse {
+  enum Status {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+  }
+  Status status = 1;
+  string message = 2;
+}

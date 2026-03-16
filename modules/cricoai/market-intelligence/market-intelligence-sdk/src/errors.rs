@@ -9,5 +9,5 @@ pub enum MarketIntelligenceError {
     Database(String),
 
     #[error("llm error: {0}")]
-    Llm(String),
+    LlmError(String),
 }

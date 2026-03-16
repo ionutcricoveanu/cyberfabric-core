@@ -1,0 +1,50 @@
+# Multi-stage build for hyperspot-server production binary
+# Stage 1: Builder
+FROM rust:1.92-bookworm AS builder
+
+# Install protobuf-compiler for prost-build
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends protobuf-compiler libprotobuf-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /build
+
+# Copy workspace files
+COPY Cargo.toml Cargo.lock ./
+COPY rust-toolchain.toml ./
+
+# Copy all workspace members
+COPY apps/hyperspot-server ./apps/hyperspot-server
+COPY libs ./libs
+COPY modules ./modules
+COPY examples ./examples
+COPY config ./config
+COPY proto ./proto
+
+# Build in release mode with cricoai features
+RUN cargo build --release --bin hyperspot-server --package=hyperspot-server --features cricoai
+
+# Stage 2: Runtime
+FROM debian:bookworm-slim
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ca-certificates libssl3 curl && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy the release binary
+COPY --from=builder /build/target/release/hyperspot-server /app/hyperspot-server
+
+# Copy config directory
+COPY --from=builder /build/config /app/config
+
+# Create logs directory
+RUN mkdir -p /app/logs
+
+EXPOSE 8087
+
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD curl -f http://localhost:8087/trading-core/v1/health || exit 1
+
+CMD ["/app/hyperspot-server", "--config", "/app/config/cricoai-docker.yaml"]

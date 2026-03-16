@@ -53,3 +53,13 @@ use agent_analytics as _;
 use agent_trade_impact as _;
 #[cfg(feature = "cricoai")]
 use auth_management as _;
+#[cfg(feature = "cricoai")]
+use market_data as _;
+#[cfg(feature = "cricoai")]
+use data_ingestion as _;
+#[cfg(feature = "cricoai")]
+use market_intelligence as _;
+#[cfg(feature = "cricoai")]
+use ml_service_sdk as _;
+#[cfg(feature = "cricoai")]
+use trading_core as _;
