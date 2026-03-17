@@ -101,7 +101,7 @@ Three stateful modules complete, trading-core in active development:
 
 **Expected outcome:** Consolidation from 15+ Docker containers to 8 containers (7 always-on + 1 on-demand training).
 
-### 🔄 Phase 4: Container Consolidation (In Progress)
+### ✅ Phase 4: Container Consolidation (Deployed)
 
 Docker production deployment consolidating 15 Python containers into 8 services:
 
@@ -128,9 +128,19 @@ Docker production deployment consolidating 15 Python containers into 8 services:
 
 **Files created:**
 - `cyberfabric-core/Dockerfile.production` — Multi-stage Rust release build
-- `Dockerfile.ml-service` — Python gRPC server
+- `services/ml-service/Dockerfile` — Python gRPC server
 - `cyberfabric-core/config/cricoai-docker.yaml` — Docker-specific config (container DNS names)
-- `docker-compose.production.yml` — Consolidated 6-service stack
+- `docker-compose.production.yml` — Consolidated 8-service stack
+- `monitoring/loki/loki-config.yaml` — Loki config with 30-day retention
+- `monitoring/grafana/provisioning/datasources/loki.yaml` — Auto-provisioned Grafana datasource
+
+**First deployment (2026-03-17):**
+- Built all images: `cricoai-hyperspot:0.3.0`, `cricoai-ml-service:1.0.0`, `cricoai-auth-proxy:1.0.0`
+- Stopped v1 stack (15 containers), started v2 stack
+- 6/7 services verified healthy (auth-proxy stopped — SSL certs need Windows-side copy)
+- Loki receiving logs from hyperspot-server and ml-service
+- Grafana accessible at `http://localhost:3200`
+- Known issue: `market-data` collector references `trade_pairs.active` column (needs migration or query fix)
 
 **Session #6 — server registration + route fixes:**
 - Registered `trading-core` in `hyperspot-server` feature flag and `registered_modules.rs`

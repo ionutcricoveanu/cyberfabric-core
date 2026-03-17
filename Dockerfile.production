@@ -14,7 +14,7 @@ COPY Cargo.toml Cargo.lock ./
 COPY rust-toolchain.toml ./
 
 # Copy all workspace members
-COPY apps/hyperspot-server ./apps/hyperspot-server
+COPY apps ./apps
 COPY libs ./libs
 COPY modules ./modules
 COPY examples ./examples
